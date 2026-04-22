@@ -22,13 +22,8 @@ class OptionalPagination(LimitOffsetPagination):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthorOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     pagination_class = OptionalPagination
-
-    def get_permissions(self):
-        if self.action == 'create':
-            return [IsAuthenticated()]
-        return super().get_permissions()
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -47,13 +42,8 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthorOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     pagination_class = None
-
-    def get_permissions(self):
-        if self.action == 'create':
-            return [IsAuthenticated()]
-        return super().get_permissions()
 
     def get_queryset(self):
         post_id = self.kwargs.get('post_id')
