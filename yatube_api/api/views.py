@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from .serializers import GroupSerializer, PostSerializer
 from .serializers import CommentSerializer, FollowSerializer
 from .permissions import IsAuthorOrReadOnly
+from .permissions import IsAuthorOrReadOnly, IsAuthenticatedOrReadOnly
 
 
 class OptionalPagination(LimitOffsetPagination):
