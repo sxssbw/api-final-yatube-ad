@@ -11,16 +11,16 @@ User.objects.filter(is_superuser=False).delete()
 
 user = User.objects.create_user(username='TestUser', password='1234567')
 user_2 = User.objects.create_user(username='TestUser2', password='1234567')
-another_user = User.objects.create_user(username='TestUserAnother', 
+another_user = User.objects.create_user(username='TestUserAnother',
                                         password='1234567')
 
 group_1 = Group.objects.create(title='Группа 1', slug='group_1')
 group_2 = Group.objects.create(title='Группа 2', slug='group_2')
 
 post = Post.objects.create(text='Тестовый пост 1', author=user, group=group_1)
-post_2 = Post.objects.create(text='Тестовый пост 12342341', author=user, 
+post_2 = Post.objects.create(text='Тестовый пост 12342341', author=user,
                              group=group_1)
-another_post = Post.objects.create(text='Тестовый пост 2', author=another_user, 
+another_post = Post.objects.create(text='Тестовый пост 2', author=another_user,
                                    group=group_2)
 
 Comment.objects.create(author=user, post=post, text='Коммент 1')
